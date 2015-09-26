@@ -1,0 +1,26 @@
+
+
+<p>
+  <strong>姓名:</strong>
+  <%= @customer.name %>
+</p>
+
+<p>
+  <strong>電話:</strong>
+  <%= @customer.telephone %>
+</p>
+<p>
+  <strong>組別:</strong>
+  <%= @customer.group %>
+</p>
+<p>
+  <strong>代碼:</strong>
+  <%= @customer.code %>
+</p>
+<p>
+  <strong>備註:</strong>
+  <%= @customer.other %>
+</p>
+
+<%= link_to '編輯', edit_customer_path(@customer) %> |
+<%= link_to '回上頁', customers_path %>
