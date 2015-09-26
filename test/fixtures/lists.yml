@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  producr_id: 
+  man: 
+  unit_price: 9.99
+  quantity: 1
+  cage_weight: 9.99
+  total_weight: 9.99
+  date: 2015-09-26
+  type: 1
+
+two:
+  producr_id: 
+  man: 
+  unit_price: 9.99
+  quantity: 1
+  cage_weight: 9.99
+  total_weight: 9.99
+  date: 2015-09-26
+  type: 1
