@@ -1,3 +1,3 @@
 class Product < ActiveRecord::Base
-	has_many :lists
+	belongs_to :list
 end

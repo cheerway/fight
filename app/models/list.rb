@@ -1,4 +1,4 @@
 class List < ActiveRecord::Base
-  belongs_to :product
-  belongs_to :man
+  has_many :products
+  has_many :men
 end
