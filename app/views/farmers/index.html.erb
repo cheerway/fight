@@ -18,7 +18,7 @@
         <td><%= farmer.phone %></td>
         <td><%= farmer.comment %></td>
         <td><%= link_to '詳細資料', farmer %></td>
-        <td><%= link_to '編輯', edit_farmer_path(farmer) %></td>
+        <td><%= link_to '編輯', edit_man_path(farmer) %></td>
         <td><%= link_to '刪除', farmer, method: :delete, data: { confirm: '是否確定刪除?' } %></td>
       </tr>
     <% end %>

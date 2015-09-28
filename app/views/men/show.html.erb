@@ -14,10 +14,10 @@
   <strong>備註:</strong>
   <%= @man.comment %>
 </p>
-<% if @man.role = 2 %>
-  <%= link_to '編輯', edit_farmer_path(@man) %> |
+<% if @man.role == 2 %>
+  <%= link_to '編輯', edit_man_path(@man) %> |
   <%= link_to '回上頁', farmers_path %>
 <% else %>
-  <%= link_to '編輯', edit_customer_path(@man) %> |
+  <%= link_to '編輯', edit_man_path(@man) %> |
   <%= link_to '回上頁', customers_path %>
 <% end %>

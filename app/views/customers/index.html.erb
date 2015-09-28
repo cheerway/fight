@@ -1,0 +1,30 @@
+
+<h1>客戶清單</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>名稱</th>
+      <th>電話</th>
+      <th>備註</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @customers.each do |customer| %>
+      <tr>
+        <td><%= customer.name %></td>
+        <td><%= customer.phone %></td>
+        <td><%= customer.comment %></td>
+        <td><%= link_to '詳細資料', customer %></td>
+        <td><%= link_to '編輯', edit_man_path(customer) %></td>
+        <td><%= link_to '刪除', customer, method: :delete, data: { confirm: '是否確定刪除?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to '新增', new_customer_path %>

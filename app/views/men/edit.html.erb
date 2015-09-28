@@ -1,6 +1,22 @@
-<h1>編輯雞農資料</h1>
+
+  <% if @man.role == 1 
+       @role = '客戶'
+    else
+       @role = '雞農'
+       end %>
+
+  
+  <h1>編輯<%=@role%>資料</h1>
+
+
 
 <%= render 'form' %>
 
-<%= link_to '列表', @men %> |
-<%= link_to '上一頁', men_path %>
+<% if @man.role == 2 %>
+  <%= link_to '列表', farmers_path %> |
+<%= link_to '上一頁', farmers_path %>
+<% else %>
+  <%= link_to '列表', customers_path %> |
+<%= link_to '上一頁', customers_path %>
+<% end %>
+

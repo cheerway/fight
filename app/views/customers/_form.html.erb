@@ -1,11 +1,10 @@
-<%= form_for(@man) do |f| %>
-
-  <% if @man.errors.any? %>
+<%= form_for(@customer) do |f| %>
+  <% if @customer.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@man.errors.count, "error") %> prohibited this man from being saved:</h2>
+      <h2><%= pluralize(@customer.errors.count, "error") %> prohibited this customer from being saved:</h2>
 
       <ul>
-      <% @man.errors.full_messages.each do |message| %>
+      <% @customer.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -13,18 +12,19 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :name, @role+'名稱' %><br>
+    <%= f.label :name, '客戶名稱' %><br>
     <%= f.text_field :name, class: "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :phone, @role+'電話' %><br>
+    <%= f.label :phone, '客戶電話' %><br>
     <%= f.text_field :phone, class: "form-control" %>
   </div>
   <div class="form-group">
     <%= f.label :comment, '備註' %><br>
     <%= f.text_area :comment, class: "form-control" %>
   </div>
-  <%= hidden_field_tag :type, 2 %>
+  
+  <%= f.hidden_field :role, value:   1 %>
   <div class="actions">
     <%= f.submit "確定" %>
   </div>
