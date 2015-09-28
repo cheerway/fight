@@ -1,10 +1,10 @@
-<%= form_for(@farmer) do |f| %>
-  <% if @farmer.errors.any? %>
+<%= form_for(@man) do |f| %>
+  <% if @man.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@farmer.errors.count, "error") %> prohibited this farmer from being saved:</h2>
+      <h2><%= pluralize(@man.errors.count, "error") %> prohibited this man from being saved:</h2>
 
       <ul>
-      <% @farmer.errors.full_messages.each do |message| %>
+      <% @man.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -23,8 +23,7 @@
     <%= f.label :comment, '備註' %><br>
     <%= f.text_area :comment, class: "form-control" %>
   </div>
-  
-  <%= f.hidden_field :role, value:   2 %>
+  <%= hidden_field_tag :type, 2 %>
   <div class="actions">
     <%= f.submit "確定" %>
   </div>
