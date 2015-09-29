@@ -1,0 +1,50 @@
+<h1>新增出貨單</h1>
+
+<%= form_for(@order) do |f| %>
+  <% if @order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+      <% @order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :product_id,'品名' %><br>
+    <%= f.collection_select(:product_id, Product.all, :id, :name, {prompt: "請選擇"}, {:class => 'form-control'} )%>
+  </div>
+  <div class="form-group">
+    <%= f.label :man_id,'客戶' %><br>
+    <%= f.collection_select(:man_id, Man.customers.all, :id, :name, {prompt: "請選擇"}, {:class => 'form-control'} )%>
+  </div>
+  <div class="form-group">
+    <%= f.label :unit_price, '單價' %><br>
+    <%= f.text_field :unit_price, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :quantity, '數量' %><br>
+    <%= f.text_field :quantity, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :cage_weight, '籠重' %><br>
+    <%= f.text_field :cage_weight, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :total_weight, '總重' %><br>
+    <%= f.text_field :total_weight, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :date, '出貨日' %><br>
+    <%= f.date_field :date, class: "form-control" %>
+  </div>
+  
+  <%= f.hidden_field :kind, value:   1 %>
+  <div class="actions">
+    <%= f.submit "確定" %>
+  </div>
+<% end %>
+
+<%= link_to '回上頁', orders_path %>

@@ -2,10 +2,6 @@ class MenController < ApplicationController
 
   before_action :set_man, only: [:show, :edit, :update, :destroy]
 
-  def index
-    @men = Man.all
-  end
-
   def edit
   end
 

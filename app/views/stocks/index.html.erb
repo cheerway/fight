@@ -1,0 +1,37 @@
+<h1>進貨清單</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>雞農</th>
+      <th>品名</th>
+      <th>單價</th>
+      <th>數量</th>
+      <th>籠重</th>
+      <th>總重</th>
+      <th>出貨日</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @stocks.each do |stock| %>
+      <tr>
+        <td><%= stock.man.name %></td>
+        <td><%= stock.product.name %></td>
+        <td><%= stock.unit_price %></td>
+        <td><%= stock.quantity %></td>
+        <td><%= stock.cage_weight %></td>
+        <td><%= stock.total_weight %></td>
+        <td><%= stock.date %></td>
+        <td><%= link_to '詳細資料', stock %></td>
+        <td><%= link_to '編輯', edit_list_path(stock) %></td>
+        <td><%= link_to '刪除', stock, method: :delete, data: { confirm: '是否確定刪除?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to '新增', new_stock_path %>

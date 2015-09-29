@@ -5,11 +5,12 @@ Rails.application.routes.draw do
   root 'farmers#index'
 
   resources :men
+  resources :lists
   resources :products
   resources :farmers
   resources :customers
-  resources :comming
-  resources :outting
+  resources :orders
+  resources :stocks
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 

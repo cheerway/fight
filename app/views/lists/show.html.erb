@@ -1,0 +1,43 @@
+
+
+<p>
+  <strong>客戶:</strong>
+  <%= @list.man.name %>
+</p>
+
+<p>
+  <strong>品名:</strong>
+  <%= @list.product.name %>
+</p>
+
+<p>
+  <strong>單價:</strong>
+  <%= @list.unit_price %>
+</p>
+
+<p>
+  <strong>數量:</strong>
+  <%= @list.quantity %>
+</p>
+
+<p>
+  <strong>籠重:</strong>
+  <%= @list.cage_weight %>
+</p>
+
+<p>
+  <strong>總重:</strong>
+  <%= @list.total_weight %>
+</p>
+
+<p>
+  <strong>出貨日:</strong>
+  <%= @list.date %>
+</p>
+<% if @list.kind == 1 %>
+  <%= link_to '編輯', edit_list_path(@list) %> |
+  <%= link_to '回列表', orders_path %>
+<% else %>
+  <%= link_to '編輯', edit_list_path(@list) %> |
+  <%= link_to '回列表', stocks_path %>
+<% end %>

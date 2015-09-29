@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150928125116) do
+ActiveRecord::Schema.define(version: 20150929110345) do
 
   create_table "lists", force: :cascade do |t|
     t.integer  "product_id",                           null: false
@@ -21,9 +21,9 @@ ActiveRecord::Schema.define(version: 20150928125116) do
     t.decimal  "cage_weight",  precision: 2, scale: 1, null: false
     t.decimal  "total_weight", precision: 5, scale: 1, null: false
     t.date     "date"
-    t.integer  "type"
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
+    t.integer  "kind"
   end
 
   add_index "lists", ["product_id"], name: "index_lists_on_product_id"

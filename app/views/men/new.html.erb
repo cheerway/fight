@@ -1,3 +1,8 @@
+<% if @man.role == 1 
+       @role = '客戶'
+    else
+       @role = '雞農'
+       end %>
 <h1>新增人員</h1>
 
 <%= render 'form' %>
