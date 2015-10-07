@@ -11,6 +11,11 @@ Rails.application.routes.draw do
   resources :customers
   resources :orders
   resources :stocks
+  get 'reports/new' => "reports#new"
+  get "reports/today" => "reports#today"
+  get "reports/choose" => "reports#choose"
+  get 'reports/:date', to: 'reports#show', as: 'date'
+
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 

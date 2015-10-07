@@ -1,0 +1,8 @@
+列印報表
+
+
+<%= form_tag(reports_choose_path, :method=>'get')%>
+  <%= label_tag( "請選擇出貨日期") %>
+    <%= date_field('day','date') %>
+    <%= submit_tag("Search") %>
+
