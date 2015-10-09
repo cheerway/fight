@@ -1,16 +1,22 @@
-<h1>出貨清單</h1>
-
-<table class="table">
+<h3 class="text-center"><u>阿瑞鬥雞進貨日報表</u></h3>
+<h3 class="text-center">(雞農群)</h3>
+<table class="table ">
   <thead>
     <tr>
-      <th>客戶</th>
+      <th colspan="3">進貨日期：<%= @d_day %></th>
+      <th colspan="5"></th>
+      <th colspan="3" class="text-right">製表日期：<%= Date.current() %></th>
+    </tr>
+    <tr>
+      <th>姓名</th>
       <th>品名</th>
-      <th>單價</th>
-      <th>數量</th>
-      <th>籠重</th>
       <th>總重</th>
-      <th>出貨日</th>
-      <th colspan="3"></th>
+      <th colspan="3">籠重</th>
+      <th>實重</th>
+      <th>單價</th>
+      <th>金額</th>
+      <th>台斤重</th>  
+      <th>備註</th>
     </tr>
   </thead>
 
@@ -19,13 +25,14 @@
       <tr>
         <td><%= order.man.name %></td>
         <td><%= order.product.name %></td>
-        <td><%= order.unit_price %></td>
-        <td><%= order.quantity %></td>
-        <td><%= order.cage_weight %></td>
         <td><%= order.total_weight %></td>
-        <td><%= order.date %></td>
-        <td><%= link_to '詳細資料', order %></td>
-        <td><%= link_to '編輯', edit_list_path(order) %></td>
+        <td><%= order.quantity %> 件</td>
+        <td>x</td>
+        <td><%= order.cage_weight %> 公斤</td>
+        <td><%= order.total_weight - order.quantity * order.cage_weight %></td>
+        <td><%= order.unit_price %> 元/台斤</td>
+        <td><%= ((order.total_weight - order.quantity * order.cage_weight) * 10 / 6 * order.unit_price).round %></td>
+        <td><%= ((order.total_weight - order.quantity * order.cage_weight) * 10 / 6).round %></td>
         <td><%= link_to '刪除', order, method: :delete, data: { confirm: '是否確定刪除?' } %></td>
       </tr>
     <% end %>

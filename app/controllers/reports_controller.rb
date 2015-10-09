@@ -18,10 +18,14 @@ class ReportsController < ApplicationController
   	redirect_to date_path(params[:day]["date"])
   end
   def show
-    c_day = Date.parse(params["date"])
-    d_day = c_day - 1
+    @c_day = Date.parse(params["date"])
+    @d_day = @c_day - 1
+    # render :text => @c_day	
   	# @lists = List.where(date: params["date"])
-  	@lists = List.where("(date = '#{c_day}' and kind = '1') 
-                   or (date = '#{d_day}' and kind = '2')")
+  	@lists = List.where("(date = '#{@c_day}' and kind = '1') 
+                   or (date = '#{@d_day}' and kind = '2')")
+  	@income_lists = List.where("(date = '#{@c_day}' and kind = '1') 
+   #                 or (date = '#{@d_day}' and kind = '2')")
+  	# @income_lists_grouped = @income_lists.group_by(|id| :man_id)
   end
 end

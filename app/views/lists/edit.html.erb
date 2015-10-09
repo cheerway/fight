@@ -47,7 +47,7 @@
     <%= f.date_field :date, class: "form-control" %>
   </div>
   
-  <%= f.hidden_field :kind, value:   1 %>
+  <%= f.hidden_field :kind, value: @list.kind %>
   <div class="actions">
     <%= f.submit "確定" %>
   </div>
