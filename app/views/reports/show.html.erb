@@ -21,7 +21,7 @@
   </thead>
 
   <tbody>
-    <% @lists.each do |order| %>
+    <% @income_lists.each do |order| %>
       <tr>
         <td><%= order.man.name %></td>
         <td><%= order.product.name %></td>
@@ -38,7 +38,50 @@
     <% end %>
   </tbody>
 </table>
+<h3 class="text-center"><u>﹙方﹚鬥雞銷貨日報表</u></h3>
+<h3 class="text-center">(客戶群)</h3>
+<table class="table ">
+  <thead>
+    <tr>
+      <th colspan="3">出貨日期：<%= @c_day %></th>
+      <th colspan="6"></th>
+      <th colspan="3" class="text-right">製表日期：<%= Date.current() %></th>
+    </tr>
+    <tr>
+      <th>姓名</th>
+      <th>品名</th>
+      <th>總重</th>
+      <th colspan="3">籠重</th>
+      <th>實重</th>
+      <th>單價</th>
+      <th>金額</th>
+      <th>平均</th>
+      <th>車</th>
+      <th>台斤重</th>  
+      
+    </tr>
+  </thead>
 
+  <tbody>
+    <% @outgo_lists.each do |order| %>
+      <tr>
+        <td><%= order.man.name %></td>
+        <td><%= order.product.name %></td>
+        <td><%= order.total_weight %></td>
+        <td><%= order.quantity %> 件</td>
+        <td>x</td>
+        <td><%= order.cage_weight %> 公斤</td>
+        <td><%= order.total_weight - order.quantity * order.cage_weight %></td>
+        <td><%= order.unit_price %> 元/台斤</td>
+        <td><%= ((order.total_weight - order.quantity * order.cage_weight) * 10 / 6 * order.unit_price).round %></td>
+        <td><%= order.total_weight / order.quantity %></td>
+        <td></td>
+        <td><%= ((order.total_weight - order.quantity * order.cage_weight) * 10 / 6).round %></td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 <br>
 
 <%= link_to '新增', new_order_path %>

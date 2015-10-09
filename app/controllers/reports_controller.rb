@@ -24,8 +24,9 @@ class ReportsController < ApplicationController
   	# @lists = List.where(date: params["date"])
   	@lists = List.where("(date = '#{@c_day}' and kind = '1') 
                    or (date = '#{@d_day}' and kind = '2')")
-  	@income_lists = List.where("(date = '#{@c_day}' and kind = '1') 
-   #                 or (date = '#{@d_day}' and kind = '2')")
+  	@income_lists = List.where("date = '#{@d_day}' and kind = '2'")
+
+  	@outgo_lists = List.where("date = '#{@c_day}' and kind = '1'")
   	# @income_lists_grouped = @income_lists.group_by(|id| :man_id)
   end
 end
