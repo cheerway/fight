@@ -21,26 +21,85 @@
   </thead>
 
   <tbody>
-    <% @income_lists.each do |order| %>
+    <%  
+      count={}
+      total_weight = 0 
+      total_quantity = 0
+      total_price  = 0
+      total_real_weight = 0
+      total_tai_weight = 0
+      sum = 0
+      product_name = ''
+    %>
+    <% @alists.each do |order| %>
+      <% if product_name == order.product.name %> 
+        <%  
+        total_price = total_price + order.total_price 
+        total_weight = total_weight + order.total_weight
+        total_tai_weight = total_tai_weight + order.tai_weight
+        total_quantity = total_quantity + order.quantity
+        total_real_weight = total_real_weight + order.real_weight
+        %>
+      <% else %>
+        <% sum = sum + total_price %>
+        <% if product_name != '' %>
+          <tr>
+            <td></td>
+            <td></td>
+            <td><%= total_weight %></td>
+            <td colspan="3">(小計：<%= total_quantity %>件)</td>
+            <td><%= total_real_weight %></td>
+            <td>(<%= total_tai_weight %> 台斤)</td>
+            <td><%= total_price %> 元 </td>
+          </tr>
+          <% count[product_name] = total_quantity %>
+        <% end %>
+      <%  
+        total_weight = order.total_weight 
+        total_quantity = order.quantity
+        total_price  = order.total_price
+        total_real_weight = order.real_weight
+        total_tai_weight = order.tai_weight
+      %>
+      <% end %>
       <tr>
+        
         <td><%= order.man.name %></td>
         <td><%= order.product.name %></td>
         <td><%= order.total_weight %></td>
         <td><%= order.quantity %> 件</td>
         <td>x</td>
         <td><%= order.cage_weight %> 公斤</td>
-        <td><%= order.total_weight - order.quantity * order.cage_weight %></td>
+        <td><%= order.real_weight %></td>
         <td><%= order.unit_price %> 元/台斤</td>
-        <td><%= ((order.total_weight - order.quantity * order.cage_weight) * 10 / 6 * order.unit_price).round %></td>
-        <td><%= ((order.total_weight - order.quantity * order.cage_weight) * 10 / 6).round %></td>
-        <td><%= link_to '刪除', order, method: :delete, data: { confirm: '是否確定刪除?' } %></td>
+        <td><%= order.total_price %></td>
+        <td><%= order.tai_weight%></td>
+        <td></td>
       </tr>
+      <% product_name = order.product.name %>  
     <% end %>
+    <tr>
+      <% sum = sum + total_price %>
+      <td></td>
+      <td></td>
+      <td><%= total_weight %></td>
+      <td colspan="3">(小計：<%= total_quantity %>件)</td>
+      <td><%= total_real_weight %></td>
+      <td>(<%= total_tai_weight %> 台斤)</td>
+      <td><%= total_price %> 元 </td>
+    </tr>
+    <% count[product_name] = total_quantity %>
+    <tr>
+    <td colspan="7"></td>
+    <td>總計 金額：</td>
+    <td><%= sum %> 元 </td>
+    </tr>
   </tbody>
 </table>
+<br>
 <h3 class="text-center"><u>﹙方﹚鬥雞銷貨日報表</u></h3>
 <h3 class="text-center">(客戶群)</h3>
-<table class="table ">
+<table class="table">
   <thead>
     <tr>
       <th colspan="3">出貨日期：<%= @c_day %></th>
@@ -63,7 +122,47 @@
   </thead>
 
   <tbody>
+    <%  
+      total_weight = 0 
+      total_quantity = 0
+      total_price  = 0
+      total_real_weight = 0
+      total_tai_weight = 0
+      sum = 0
+      product_name = ''
+    %>
     <% @outgo_lists.each do |order| %>
+      <%  product_name  ||= order.product.name %>
+        <% if product_name == order.product.name %> 
+          <%  
+          total_price = total_price + order.total_price 
+          total_weight = total_weight + order.total_weight
+          total_tai_weight = total_tai_weight + order.tai_weight
+          total_quantity = total_quantity + order.quantity
+          total_real_weight = total_real_weight + order.real_weight
+          %>
+        <% else %>
+          <% sum = sum + total_price %>
+          <% if product_name != '' %>
+            <tr>
+              <td></td>
+              <td></td>
+              <td><%= total_weight %></td>
+              <td colspan="3">(小計：<%= total_quantity %>件)</td>
+              <td><%= total_real_weight %></td>
+              <td>(<%= total_tai_weight %> 台斤)</td>
+              <td><%= total_price %> 元 </td>
+            </tr>
+          <% end %>
+        <%  
+          total_weight = order.total_weight 
+          total_quantity = order.quantity
+          total_price  = order.total_price
+          total_real_weight = order.real_weight
+          total_tai_weight = order.tai_weight
+        %>
+        <% end %>
+
       <tr>
         <td><%= order.man.name %></td>
         <td><%= order.product.name %></td>
@@ -71,17 +170,69 @@
         <td><%= order.quantity %> 件</td>
         <td>x</td>
         <td><%= order.cage_weight %> 公斤</td>
-        <td><%= order.total_weight - order.quantity * order.cage_weight %></td>
+        <td><%= order.real_weight %></td>
         <td><%= order.unit_price %> 元/台斤</td>
-        <td><%= ((order.total_weight - order.quantity * order.cage_weight) * 10 / 6 * order.unit_price).round %></td>
+        <td><%= order.total_price %></td>
         <td><%= order.total_weight / order.quantity %></td>
         <td></td>
-        <td><%= ((order.total_weight - order.quantity * order.cage_weight) * 10 / 6).round %></td>
+        <td><%= order.tai_weight%></td>
         
       </tr>
+      <% product_name = order.product.name %>  
     <% end %>
+    <tr>
+      <% sum = sum + total_price %>
+      <td></td>
+      <td></td>
+      <td><%= total_weight %></td>
+      <td colspan="3">(小計：<%= total_quantity %>件)</td>
+      <td><%= total_real_weight %></td>
+      <td>(<%= total_tai_weight %> 台斤)</td>
+      <td><%= total_price %> 元 </td>
+    </tr>
+    <tr>
+    <td colspan="7"></td>
+    <td>總計 金額：</td>
+    <td><%= sum %> 元 </td>
+    </tr>
   </tbody>
 </table>
 <br>
+<h3 class="text-center"><u>﹙方﹚鬥雞失重日報表</u></h3>
+<h3 class="text-center">(失重分析)</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th colspan="3">進貨日期：<%= @d_day %></th>
+      <th colspan="6" class="text-center">銷貨日期：<%= @c_day %> </th>
+      <th colspan="3" class="text-right">製表日期：<%= Date.current() %></th>
+    </tr>
+    <tr>
+      <th>項目</th>
+      <th>品名</th>
+      <th>件數</th>
+      <th>雞農進貨實重</th>
+      <th>客戶銷貨實重</th>
+      <th>失重</th>
+      <th>備註</th>
+    </tr>
+  </thead>
 
-<%= link_to '新增', new_order_path %>
+  <tbody>
+    <% i=1 %>
+    <% @count.each_pair do |k, v| %>
+      <tr>
+        <td><%= i %></td> 
+
+        <td><%= k %></td>
+        <td><%= count[k]%></td>
+        <td><%= v[0] %></td>
+        <td><%= v[1] %></td>
+        <td><%= v[0]-v[1] %></td>
+        <td> 公斤</td>
+        <td></td>   
+      </tr>
+      <% i+=1 %>
+    <% end %>
+  </tbody>
+</table>

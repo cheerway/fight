@@ -28,5 +28,23 @@ class ReportsController < ApplicationController
 
   	@outgo_lists = List.where("date = '#{@c_day}' and kind = '1'")
   	# @income_lists_grouped = @income_lists.group_by(|id| :man_id)
+
+  	@alists = List.where("date = '#{@d_day}' and kind = '2'").order(:product_id)
+
+  	# @compare_lists = compare(@income_lists, @outgo_lists)
+		@count = compare(@income_lists, @outgo_lists)
+		
+  end
+
+  def compare( come_in,  go_out)
+  	h1=come_in.group(:product_id).sum(:total_weight)
+  	h2=go_out.group(:product_id).sum(:total_weight)
+  	h3 = Hash.new()
+  	h1.each_key do |k|
+  		h1[k] ||=0
+  		h2[k] ||=0
+  		h3[Product.find(k).name] = [h1[k],h2[k]]
+  	end
+  	h3
   end
 end
